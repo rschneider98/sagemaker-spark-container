@@ -333,7 +333,7 @@ class Bootstrapper:
         processing_job_config = self.load_processing_job_config()
         instance_type_info = self.load_instance_type_info()
 
-        if processing_job_config and instance_type_info:
+        try:
             instance_type = processing_job_config["ProcessingResources"]["ClusterConfig"]["InstanceType"].replace(
                 "ml.", ""
             )
@@ -345,11 +345,12 @@ class Bootstrapper:
                 f"Detected instance type: {instance_type} with "
                 f"total memory: {instance_mem_mb}M and total cores: {instance_cores}"
             )
-        else:
+        except KeyError as e:
             instance_count = 1
             instance_mem_mb = int(psutil.virtual_memory().total / (1024 * 1024))
             instance_cores = psutil.cpu_count(logical=True)
             logging.warning(
+                f"{e} "
                 f"Failed to detect instance type config. "
                 f"Found total memory: {instance_mem_mb}M and total cores: {instance_cores}"
             )
