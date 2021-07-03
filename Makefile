@@ -12,7 +12,7 @@ ifeq ($(IS_RELEASE_BUILD),)
     FRAMEWORK_VERSION := py37
     SM_VERSION := 1.0
     USE_CASE := processing
-    BUILD_CONTEXT := ./spark/${USE_CASE}/${SPARK_VERSION}/py3
+    BUILD_CONTEXT := ./spark/${USE_CASE}/${SPARK_VERSION}/${FRAMEWORK_VERSION}
     AWS_PARTITION := aws
     AWS_DOMAIN := amazonaws.com
     export SPARK_ACCOUNT_ID=$(AWS_ACCOUNT_ID)
