@@ -334,6 +334,8 @@ class Bootstrapper:
         instance_type_info = self.load_instance_type_info()
 
         try:
+            if not (processing_job_config and instance_type_info):
+                raise KeyError("processing job config or instance type info fails to exist")
             instance_type = processing_job_config["ProcessingResources"]["ClusterConfig"]["InstanceType"].replace(
                 "ml.", ""
             )

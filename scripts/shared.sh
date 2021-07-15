@@ -65,13 +65,7 @@ function parse_std_args() {
     [[ -z "${DEST_REPO}" ]] && repository=sagemaker-spark-$use_case || repository="${DEST_REPO}"
     [[ -z "${REGION}" ]] && aws_region='us-west-2' || aws_region="${REGION}"
 
-    if [ $framework_version == 'py37' ]
-    then
-      # represents the python sub directory
-      build_context=./spark/${use_case}/${spark_version}/py3
-    else
-      build_context=./spark/${use_case}/${spark_version}/${framework_version}
-    fi
+    build_context=./spark/${use_case}/${spark_version}/${framework_version}
 
     aws_account=$(get_aws_account $aws_region)
     # spark tagging scheme :
